@@ -17,3 +17,8 @@ id = "aws-access-key-test"
 description = "AWS Access Key detected"
 regex = '''AKIA[0-9A-Z]{16}'''
 secretGroup = 0 
+[[rules]]
+id = "github-token"
+description = "GitHub token detected"
+regex = '''ghp_[A-Za-z0-9_]{20,}'''
+secretGroup = 0

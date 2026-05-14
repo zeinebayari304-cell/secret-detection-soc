@@ -35,9 +35,21 @@ alerts = [
         "status": "Open",
         "assigned_to": "SOC-Analyst-03"
     }
-]
+
 
 with open("soc_alerts.json", "w", encoding="utf-8") as file:
     json.dump(alerts, file, indent=4)
 
-print("Alertes SOC générées avec succès.")
+print("Alertes SOC générées avec succès.") 
+{
+    "id": "INC-004",
+    "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+    "severity": "CRITICAL",
+    "type": "GitHub Token Exposed",
+    "source": "GitHub Actions + GitLeaks",
+    "description": "Un token GitHub a été détecté dans le code source.",
+    "risk_score": 90,
+    "status": "Open",
+    "assigned_to": "SOC-Analyst-04"
+}
+] 
