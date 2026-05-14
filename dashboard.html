@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mini SOC Dashboard</title>
+    <style>
+        body {
+            font-family: Arial;
+            background: #111827;
+            color: white;
+            padding: 30px;
+        }
+        .card {
+            background: #1f2937;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 6px solid red;
+        }
+        .high {
+            color: #ff4d4d;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Mini SOC Dashboard</h1>
+
+    <div class="card">
+        <h2>Alerte : Secret exposé</h2>
+        <p><strong>Gravité :</strong> <span class="high">HIGH</span></p>
+        <p><strong>Source :</strong> GitHub Actions + GitLeaks</p>
+        <p><strong>Description :</strong> Un mot de passe ou une clé API a été détecté dans le code.</p>
+        <p><strong>Status :</strong> Open</p>
+    </div>
+</body>
+</html> 

@@ -1,0 +1,28 @@
+name: Secret Detection SOC Alert
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  secret-detection:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout du code
+        uses: actions/checkout@v4
+
+      - name: Scan avec GitLeaks
+        id: gitleaks
+        uses: gitleaks/gitleaks-action@v2
+        continue-on-error: true
+
+      - name: Générer une alerte SOC si secret trouvé
+        if: steps.gitleaks.outcome == 'failure'
+        run: |
+          python generate_soc_alert.py
+          echo "::error::ALERTE SOC - Secret exposé détecté dans le dépôt"
+
+      - name: Bloquer le pipeline
+        if: steps.gitleaks.outcome == 'failure'
+        run: exit 1
