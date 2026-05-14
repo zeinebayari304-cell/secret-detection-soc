@@ -1,16 +1,43 @@
 import json
 from datetime import datetime
 
-alert = {
-    "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-    "severity": "HIGH",
-    "type": "Exposed Secret Detected",
-    "source": "GitHub Actions + GitLeaks",
-    "description": "Un secret a été détecté dans le code source.",
-    "status": "Open"
-}
+alerts = [
+    {
+        "id": "INC-001",
+        "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+        "severity": "CRITICAL",
+        "type": "AWS Access Key Exposed",
+        "source": "GitHub Actions + GitLeaks",
+        "description": "Une clé AWS a été détectée dans le code source.",
+        "risk_score": 95,
+        "status": "Open",
+        "assigned_to": "SOC-Analyst-01"
+    },
+    {
+        "id": "INC-002",
+        "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+        "severity": "HIGH",
+        "type": "Hardcoded Password",
+        "source": "GitHub Actions + GitLeaks",
+        "description": "Un mot de passe codé en dur a été détecté.",
+        "risk_score": 80,
+        "status": "Investigating",
+        "assigned_to": "SOC-Analyst-02"
+    },
+    {
+        "id": "INC-003",
+        "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+        "severity": "MEDIUM",
+        "type": "Fake API Key",
+        "source": "GitHub Actions + GitLeaks",
+        "description": "Une clé API suspecte a été détectée.",
+        "risk_score": 60,
+        "status": "Open",
+        "assigned_to": "SOC-Analyst-03"
+    }
+]
 
 with open("soc_alerts.json", "w", encoding="utf-8") as file:
-    json.dump([alert], file, indent=4)
+    json.dump(alerts, file, indent=4)
 
-print("Alerte SOC générée avec succès.")
+print("Alertes SOC générées avec succès.")

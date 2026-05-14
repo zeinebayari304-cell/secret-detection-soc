@@ -1,1 +1,35 @@
-[]
+[
+    {
+        "id": "INC-001",
+        "timestamp": "2026-05-14 15:16:43",
+        "severity": "CRITICAL",
+        "type": "AWS Access Key Exposed",
+        "source": "GitHub Actions + GitLeaks",
+        "description": "Une cl\u00e9 AWS a \u00e9t\u00e9 d\u00e9tect\u00e9e dans le code source.",
+        "risk_score": 95,
+        "status": "Open",
+        "assigned_to": "SOC-Analyst-01"
+    },
+    {
+        "id": "INC-002",
+        "timestamp": "2026-05-14 15:16:43",
+        "severity": "HIGH",
+        "type": "Hardcoded Password",
+        "source": "GitHub Actions + GitLeaks",
+        "description": "Un mot de passe cod\u00e9 en dur a \u00e9t\u00e9 d\u00e9tect\u00e9.",
+        "risk_score": 80,
+        "status": "Investigating",
+        "assigned_to": "SOC-Analyst-02"
+    },
+    {
+        "id": "INC-003",
+        "timestamp": "2026-05-14 15:16:43",
+        "severity": "MEDIUM",
+        "type": "Fake API Key",
+        "source": "GitHub Actions + GitLeaks",
+        "description": "Une cl\u00e9 API suspecte a \u00e9t\u00e9 d\u00e9tect\u00e9e.",
+        "risk_score": 60,
+        "status": "Open",
+        "assigned_to": "SOC-Analyst-03"
+    }
+]

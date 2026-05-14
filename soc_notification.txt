@@ -1,0 +1,17 @@
+🚨 ALERTE SOC - SECRET EXPOSÉ DÉTECTÉ
+
+Gravité : CRITICAL
+Source : GitHub Actions + GitLeaks
+Repository : secret-detection-soc
+Statut : Open
+
+Description :
+Un secret a été détecté dans le code source après un push GitHub.
+
+Action immédiate :
+- Bloquer le pipeline
+- Supprimer le secret du code
+- Remplacer par une variable d’environnement
+- Relancer le scan
+
+Assigné à : SOC-Analyst-01 

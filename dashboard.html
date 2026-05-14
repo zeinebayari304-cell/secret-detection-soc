@@ -5,31 +5,91 @@
     <style>
         body {
             font-family: Arial;
-            background: #111827;
+            background: #0f172a;
             color: white;
             padding: 30px;
         }
-        .card {
-            background: #1f2937;
+        h1 {
+            color: #f8fafc;
+        }
+        .kpis {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+        .kpi {
+            background: #1e293b;
             padding: 20px;
-            border-radius: 10px;
+            border-radius: 12px;
+            width: 180px;
+        }
+        .kpi h2 {
+            margin: 0;
+            font-size: 32px;
+        }
+        .kpi p {
+            color: #94a3b8;
+        }
+        .alert {
+            background: #1e293b;
+            padding: 18px;
+            border-radius: 12px;
+            margin-bottom: 15px;
             border-left: 6px solid red;
         }
-        .high {
-            color: #ff4d4d;
-            font-weight: bold;
-        }
+        .CRITICAL { color: #ef4444; font-weight: bold; }
+        .HIGH { color: #f97316; font-weight: bold; }
+        .MEDIUM { color: #eab308; font-weight: bold; }
+        .LOW { color: #22c55e; font-weight: bold; }
     </style>
 </head>
 <body>
-    <h1>Mini SOC Dashboard</h1>
+    <h1>Mini SOC Dashboard - Secret Detection</h1>
 
-    <div class="card">
-        <h2>Alerte : Secret exposé</h2>
-        <p><strong>Gravité :</strong> <span class="high">HIGH</span></p>
-        <p><strong>Source :</strong> GitHub Actions + GitLeaks</p>
-        <p><strong>Description :</strong> Un mot de passe ou une clé API a été détecté dans le code.</p>
-        <p><strong>Status :</strong> Open</p>
+    <div class="kpis">
+        <div class="kpi">
+            <h2 id="total">0</h2>
+            <p>Total incidents</p>
+        </div>
+        <div class="kpi">
+            <h2 id="critical">0</h2>
+            <p>Critical alerts</p>
+        </div>
+        <div class="kpi">
+            <h2 id="open">0</h2>
+            <p>Open alerts</p>
+        </div>
     </div>
+
+    <div id="alerts"></div>
+
+    <script>
+        fetch("soc_alerts.json")
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("total").innerText = data.length;
+                document.getElementById("critical").innerText =
+                    data.filter(a => a.severity === "CRITICAL").length;
+                document.getElementById("open").innerText =
+                    data.filter(a => a.status === "Open").length;
+
+                let container = document.getElementById("alerts");
+
+                data.forEach(alert => {
+                    container.innerHTML += `
+                        <div class="alert">
+                            <h2>${alert.id} - ${alert.type}</h2>
+                            <p><strong>Severity:</strong> <span class="${alert.severity}">${alert.severity}</span></p>
+                            <p><strong>Risk Score:</strong> ${alert.risk_score}/100</p>
+                            <p><strong>Source:</strong> ${alert.source}</p>
+                            <p><strong>Description:</strong> ${alert.description}</p>
+                            <p><strong>Status:</strong> ${alert.status}</p>
+                            <p><strong>Assigned to:</strong> ${alert.assigned_to}</p>
+                            <p><strong>Time:</strong> ${alert.timestamp}</p>
+                        </div>
+                    `;
+                });
+            });
+    </script>
 </body>
 </html> 
